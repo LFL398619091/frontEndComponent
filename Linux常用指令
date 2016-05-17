@@ -4,3 +4,5 @@
 4.tail -f nvshen.txt 动态刷新文档,经常用于调试
 5.sudo cp nvshen.txt ./aaa/nvshen.txt 以超级管理员的身份运行某条指令
 6./ 代表根目录  .代表当前目录
+7.chown zhangsansan:zhangsansan nvshen.txt 只有root账户具备此权限,修改某个文件的所有者
+8.chmod u+rwx nvshen.txt  把nvshen.txt的读写执行权限赋予给当前用户 chmod g-rwx nvshen.txt 移除读写执行权限
