@@ -1,0 +1,6 @@
+1.ps -ef | grep sshd  模糊搜索进程信息
+2.kill -9 pid  强制杀掉指定进程
+3.grep hello ./* 在某个目录下搜索文本信息
+4.tail -f nvshen.txt 动态刷新文档,经常用于调试
+5.sudo cp nvshen.txt ./aaa/nvshen.txt 以超级管理员的身份运行某条指令
+6./ 代表根目录  .代表当前目录
