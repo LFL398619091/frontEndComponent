@@ -9,4 +9,5 @@
 9.vim test.txt 编辑文件 s->insert esc:退出编辑模式 :执行指令(q!退出  wq保存并退出 wq!强制保存并退出)
 10.sudo setup 提供伪图形界面,方便用户修改系统服务配置
 11.启动或者重启服务  service network start/restart/stop   service iptables start/restart/stop
-12.将某项服务加入开机启动  sudo chkconfig iptables on / sudo chkconfig iptables off
+12.将某项服务加入开机启动  sudo chkconfig iptables on / sudo chkconfig iptables off 
+13.查看运行中的服务 netstat -nltp | grep httpd  查找http服务
