@@ -11,3 +11,9 @@
 11.启动或者重启服务  service network start/restart/stop   service iptables start/restart/stop
 12.将某项服务加入开机启动  sudo chkconfig iptables on / sudo chkconfig iptables off 
 13.查看运行中的服务 netstat -nltp | grep httpd  查找http服务
+14.centos安装软件的两种方式:rpm/yum install
+15.vim /etc/inittab  更改centos启动级别,千万不要设为0(关机)和6(重启),一般设为3(多用户全功能模式)或5(带图形界面) id:5:initdefault:
+16.几个常用工具  1)wc(单词统计)  wc nvshen.txt  4(行)  19(单词)  120(字符)
+  2)echo 输出变量/常量  eg:x=1 y=2  echo $x$y  =>12  false echo $? =>1 返回上一条语句的值
+  3)vim 默认进入的是一般模式,无法进行编辑操作,iao可以进入编辑模式,yy复制,p粘贴  esc:返回到一般模式  :wq 保存 :wq! 强制保存并推出 :q退出
+:q! 强制退出
