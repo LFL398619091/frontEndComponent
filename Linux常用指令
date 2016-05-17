@@ -6,3 +6,7 @@
 6./ 代表根目录  .代表当前目录
 7.chown zhangsansan:zhangsansan nvshen.txt 只有root账户具备此权限,修改某个文件的所有者
 8.chmod u+rwx nvshen.txt  把nvshen.txt的读写执行权限赋予给当前用户 chmod g-rwx nvshen.txt 移除读写执行权限
+9.vim test.txt 编辑文件 s->insert esc:退出编辑模式 :执行指令(q!退出  wq保存并退出 wq!强制保存并退出)
+10.sudo setup 提供伪图形界面,方便用户修改系统服务配置
+11.启动或者重启服务  service network start/restart/stop   service iptables start/restart/stop
+12.将某项服务加入开机启动  sudo chkconfig iptables on / sudo chkconfig iptables off
