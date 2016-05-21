@@ -1,0 +1,37 @@
+今天在自己的centos机子上安装jdk，发现以前的教程都比较旧了，很多东西都过时了。今天把自己安装的感受写一下。
+
+判断是否安装
+首先，我们得判断机子上是不是安装了jdk，好多人推荐使用java -version命令。我的计算机上使用java -version命令，内容如下：
+
+java version "1.7.0_45"
+OpenJDK Runtime Environment (rhel-2.4.3.2.el6_4-i386 u45-b15)
+OpenJDK Server VM (build 24.45-b08, mixed mode)
+
+这看起来好像我的机子中已经安装了jdk，但是当我使用javac时，会提示：
+
+-bash: javac: command not found
+
+这说明第一个java命令，不是安装的jdk中的java命令，而是在$PATH的所有路径下有一个可以执行的java文件，说明jdk还是没有正确安装。这个要特别注意。
+
+安装jdk
+去http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html中下载jdk的安装文件。由于我的Linux是32位的，因此我下载jdk-8u25-linux-i586.tar.gz文件。
+新建/usr/java文件夹，将jdk-8u25-linux-i586.tar.gz放到该文件夹中，并将工作目录切换到/usr/java目录下。
+执行命令tar -zxvf jdk-8u25-linux-i586.gz 进行解压，解压后发现/usr/java多了一个jdk1.8.0_25文件夹。
+通过以上步骤，jdk就已经全部安装完成了。下面，就是环境变量的配置。
+ 
+
+配置环境变量
+使用vim /etc/profile编辑profile文件
+在/etc/profile底部加入如下内容
+JAVA_HOME=/usr/java/jdk1.8.0_25
+PATH=$JAVA_HOME/bin:$PATH
+CLASSPATH=$JAVA_HOME/jre/lib/ext:$JAVA_HOME/lib/tools.jar
+export PATH JAVA_HOME CLASSPATH
+
+以上，环境变量配置完成。需要注意的是，PATH在配置的时候，一定要把$JAVA_HOME/bin放在前面，不然使用java命令时，系统会找到以前的java，再不往下找了。这样java这个可执行文件运行的目录其实不在$JAVA_HOME/bin下，而在其它目录下，会造成很大的问题。
+还要注意，以前其它教程写的CLASSPATH=$JAVA_HOME/lib.tools.jar，不知道以前的版本是怎么样的，现在的版本是没有这样的jar包的。
+最后使用source /etc/profile让profile文件立即生效。
+命令测试
+使用javac命令，不会出现command not found错误
+使用java -version，出现版本为java version "1.8.0_25"
+echo $JAVA_HOME, echo $CLASSPATH, echo $PATH，看看自己的配置是否都正确。
