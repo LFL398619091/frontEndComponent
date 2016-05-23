@@ -1,0 +1,189 @@
+ mysql+spring+mybatis实现数据库读写分离[代码配置]
+ 
+标签： java编程mysql读写分离
+
+分类：  java历程（48）   spring（7）  
+
+场景：一个读数据源一个读写数据源。
+
+原理：借助spring的【org.springframework.jdbc.datasource.lookup.AbstractRoutingDataSource】这个抽象类实现，看名字可以了解到是一个路由数据源的东西，这个类中有一个方法
+[java] view plain copy 在CODE上查看代码片派生到我的代码片
+/** 
+ * Determine the current lookup key. This will typically be 
+ * implemented to check a thread-bound transaction context. 
+ * <p>Allows for arbitrary keys. The returned key needs 
+ * to match the stored lookup key type, as resolved by the 
+ * {@link #resolveSpecifiedLookupKey} method. 
+ */  
+protected abstract Object determineCurrentLookupKey();  
+
+每次去连数据库的时候，spring会调用这个方法去找对应的数据源。返回值即对应的数据源的LookUpKey.那么这个LookUpKey在哪定义的呢？看下面的dataBase.xml的配置
+
+[html] view plain copy 在CODE上查看代码片派生到我的代码片
+<!--数据源 读写 -->  
+<bean id="dataSourceRW" class="org.logicalcobwebs.proxool.ProxoolDataSource">  
+    <property name="alias" value="ihotelRW"></property>  
+    <property name="delegateProperties">  
+        <value>user=${jdbc.username},password=${jdbc.password}  
+        </value>  
+    </property>  
+    <property name="user" value="${jdbc.username}" />  
+    <property name="password" value="${jdbc.password}" />  
+    <property name="driver" value="${jdbc.driverClassName}" />  
+    <property name="driverUrl" value="${jdbc.url}" />  
+    <property name="maximumConnectionCount" value="${jdbc.maximumConnectionCount}"></property>  
+    <property name="maximumActiveTime" value="${jdbc.maximumActiveTime}"></property>  
+    <property name="maximumConnectionLifetime" value="${jdbc.maximumConnectionLifetime}"></property>  
+    <property name="prototypeCount" value="${jdbc.prototypeCount}"></property>  
+    <property name="houseKeepingSleepTime" value="${jdbc.houseKeepingSleepTime}"></property>  
+    <property name="simultaneousBuildThrottle" value="${jdbc.simultaneousBuildThrottle}"></property>  
+    <property name="houseKeepingTestSql" value="${jdbc.houseKeepingTestSql}"></property>  
+    <property name="verbose" value="${jdbc.verbose}"></property>  
+    <property name="statistics" value="${jdbc.statistics}"></property>  
+    <property name="statisticsLogLevel" value="${jdbc.statisticsLogLevel}"></property>  
+</bean>  
+  
+   <!--数据源 读-->  
+   <bean id="dataSourceR" class="org.logicalcobwebs.proxool.ProxoolDataSource">  
+       <property name="alias" value="ihotelR"></property>  
+       <property name="delegateProperties">  
+           <value>user=${jdbc.r.username},password=${jdbc.r.password}  
+           </value>  
+       </property>  
+       <property name="user" value="${jdbc.r.username}" />  
+       <property name="password" value="${jdbc.r.password}" />  
+       <property name="driver" value="${jdbc.r.driverClassName}" />  
+       <property name="driverUrl" value="${jdbc.r.url}" />  
+       <property name="maximumConnectionCount" value="${jdbc.maximumConnectionCount}"></property>  
+       <property name="maximumActiveTime" value="${jdbc.maximumActiveTime}"></property>  
+       <property name="maximumConnectionLifetime" value="${jdbc.maximumConnectionLifetime}"></property>  
+       <property name="prototypeCount" value="${jdbc.prototypeCount}"></property>  
+       <property name="houseKeepingSleepTime" value="${jdbc.houseKeepingSleepTime}"></property>  
+       <property name="simultaneousBuildThrottle" value="${jdbc.simultaneousBuildThrottle}"></property>  
+       <property name="houseKeepingTestSql" value="${jdbc.houseKeepingTestSql}"></property>  
+       <property name="verbose" value="${jdbc.verbose}"></property>  
+       <property name="statistics" value="${jdbc.statistics}"></property>  
+       <property name="statisticsLogLevel" value="${jdbc.statisticsLogLevel}"></property>  
+   </bean>  
+     
+   <!-- 动态数据源 -->  
+   <bean id="dynamicDataSource" class="com.dao.datasource.DynamicDataSource">  
+       <!-- 通过key-value关联数据源 -->  
+       <property name="targetDataSources">  
+           <map>  
+               <entry value-ref="dataSourceRW" key="dataSourceKeyRW"></entry>  
+               <entry value-ref="dataSourceR" key="dataSourceKeyR"></entry>  
+           </map>  
+       </property>  
+       <property name="defaultTargetDataSource" ref="dataSourceRW" />      
+   </bean>  
+  
+<!--mybatis与Spring整合 开始 -->  
+<bean id="sqlSessionFactory" name="sqlSessionFactory"  
+    class="org.mybatis.spring.SqlSessionFactoryBean">  
+    <property name="configLocation" value="classpath:conf/core/sqlMapConfig.xml" />  
+    <property name="dataSource" ref="dynamicDataSource" />  
+</bean>  
+动态数据源dynamicDataSource中的dataSourceKeyRW、dataSourceKeyR就是
+[java] view plain copy 在CODE上查看代码片派生到我的代码片
+protected abstract Object determineCurrentLookupKey();  
+这个方法要返回的值。那么如何设置，让这个方法的返回值是根据我们的需要返回dataSourceKeyRW、dataSourceKeyR呢？由于这个方法没有入参，并且是spring自动调用的，因此考虑使用静态变量存储dataSource的key，在调用sql语句前设置静态变量的值，然后在这个方法中得到静态变量的值，返回。又考虑到多线程，同时可能会有很多请求，为避免线程之间相互干扰，考虑使用threadLocal。
+先看存储dataSourceKey的容器类。
+[java] view plain copy 在CODE上查看代码片派生到我的代码片
+public class DBContextHolder {  
+  
+    /** 
+     * 线程threadlocal 
+     */  
+    private static ThreadLocal<String> contextHolder = new ThreadLocal<>();  
+  
+    private String DB_TYPE_RW = "dataSourceKeyRW";  
+    private String DB_TYPE_R = "dataSourceKeyR";  
+  
+    public String getDbType() {  
+        String db = contextHolder.get();  
+        if (db == null) {  
+            db = DB_TYPE_RW;// 默认是读写库  
+        }  
+        return db;  
+    }  
+  
+    /** 
+     *  
+     * 设置本线程的dbtype 
+     *  
+     * @param str 
+     * @see [相关类/方法](可选) 
+     * @since [产品/模块版本](可选) 
+     */  
+    public void setDbType(String str) {  
+        contextHolder.set(str);  
+    }  
+  
+    /** 
+     * clearDBType 
+     *  
+     * @Title: clearDBType 
+     * @Description: 清理连接类型 
+     */  
+    public static void clearDBType() {  
+        contextHolder.remove();  
+    }  
+}  
+
+动态数据源的实现类。
+
+[java] view plain copy 在CODE上查看代码片派生到我的代码片
+public class DynamicDataSource extends AbstractRoutingDataSource {  
+  
+    /* 
+     * (non-Javadoc) 
+     * @see javax.sql.CommonDataSource#getParentLogger() 
+     */  
+    @Override  
+    public Logger getParentLogger() throws SQLFeatureNotSupportedException {  
+        // TODO Auto-generated method stub  
+        return null;  
+    }  
+  
+    /** 
+     *  
+     * override determineCurrentLookupKey 
+     * <p> 
+     * Title: determineCurrentLookupKey 
+     * </p> 
+     * <p> 
+     * Description: 自动查找datasource 
+     * </p> 
+     *  
+     * @return 
+     */  
+    @Override  
+    protected Object determineCurrentLookupKey() {  
+        return DBContextHolder.getDbType();  
+    }  
+  
+}  
+
+在DAO层中设置数据库类型。
+[java] view plain copy 在CODE上查看代码片派生到我的代码片
+/** 
+     * 添加邮件 
+     *  
+     * @param sms 
+     * @return 
+     */  
+    public boolean insertEmail(Email email) {  
+          
+        //根据具体需要设置不同的数据库  
+        DBContextHolder.setDbType(DBContextHolder.DB_TYPE_RW);  
+        //DBContextHolder.setDbType(DBContextHolder.DB_TYPE_R);  
+        int result = this.getSqlSession().insert(STATEMENT + ".addEntity",  
+                email);  
+        return result == 1;  
+    }  
+
+文章来源:http://blog.csdn.net/xtj332/article/details/43953699
+
+
+在本例中，我们是在DAO中指定数据库，我们也可以根据需要在service或者controller中指定DB类型，需要记住的是setDbType是针对线程维度的。要考虑多线程的问题。
