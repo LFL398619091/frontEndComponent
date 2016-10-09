@@ -1,0 +1,24 @@
+github相关资料：
+1）密钥相关：
+	Your identification has been saved in /Users/Jameslin/.ssh/id_rsa.
+	Your public key has been saved in /Users/Jameslin/.ssh/id_rsa.pub.
+	The key fingerprint is:
+	79:e2:2e:bb:2b:21:fb:29:87:a7:c3:fc:78:76:d7:24 15505951676@163.com
+2)连接git@github.com
+	ssh -T git@github.com
+3）我的分支地址
+	https://github.com/LFL398619091/tks2u.git
+4）连接远程仓库
+	git remote add jameslin git@github.com:LFL398619091/tks2u.git  //连接远程仓库并建了一个名叫：jameslin的别名
+	如果报错，则执行	git remote rm jameslin
+5）提交代码
+	a>选中需要提交的文件	git add xxx.xxx(*)		
+	b>提交到本地仓库并注释	git commit -m "这是我刚刚提交的代码"
+	c>push之前，先从远程仓库更新代码		git pull
+	d>提交到远程仓库		git push -u jameslin master(jameslin仓库的master分支)
+6 常用命令
+	git checkout develop 切换分之
+	git pull 同步远程仓库文件
+	git add ./images/* 将需要提交的文件加入预缓存区域
+	git commit -m "balabalala" 将修改的文件提交到本地仓库并注释
+	git push -u origin develop 将本地仓库修改的文件提交到远程origin（别名）仓库的develop分支	

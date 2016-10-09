@@ -1,0 +1,43 @@
+--创建秒杀库存表
+DROP  TABLE  IF  EXISTS  'seckill';
+CREATE  TABLE  seckill(
+	seckill_id  bigint  NOT  NULL  AUTO_INCREMENT  COMMENT  '商品库存ID',
+	name  varchar(120)  NOT  NULL  COMMENT  '商品名称',
+	number  int  NOT  NULL  COMMENT  '库存数量',
+	start_time  datetime  NOT  NULL  COMMENT  '秒杀开启时间',
+	end_time  datetime  NOT  NULL  COMMENT  '秒杀结束时间',
+	create_time  timestamp  NOT  NULL  DEFAULT  CURRENT_TIMESTAMP  COMMENT  '创建时间',
+	PRIMARY  KEY  (seckill_id),
+	key  idx_start_time(start_time),
+	key  idx_end_time(end_time),
+	key  idx_create_time(create_time)
+)ENGINE = InnoDB  AUTO_INCREMENT=1000  DEFAULT  CHARSET=utf8  COMMENT='秒杀库存表';
+
+--初始化数据
+insert  into  
+	seckill(name,number,start_time,end_time)  
+values
+	('500元秒杀iPadAir2',150,'2016-06-07 10:00:00','2016-06-07 21:59:59'),
+	('1000元秒杀iPhone6s',100,'2016-06-05 08:00:00','2016-06-07 23:59:59'),
+	('300元秒杀AppleWatch',200,'2016-06-04 10:00:00','2016-06-05 22:59:59'),
+	('2000元秒杀LeTV',50,'2016-06-03 08:00:00','2016-06-06 20:59:59'),
+	('4000元秒杀MacBookAir',250,'2016-06-06 00:00:00','2016-06-06 19:59:59'),
+	('10元秒杀iPhone4s',500,'2016-06-06 00:00:00','2016-06-07 18:59:59'),
+	('5000元秒杀MacPro',10,'2016-06-05 00:00:00','2016-06-10 17:59:59');
+	
+	
+--秒杀成功明细表
+create  table  success_killed(
+	seckill_id  bigint  NOT  NULL  COMMENT  '秒杀商品ID',
+	user_phone  bigint  NOT  NULL  COMMENT  '用户手机号',
+	state  tinyint  NOT  NULL  DEFAULT  -1  COMMENT  '状态标示：－1：无效,0:成功秒杀  1:已付款  2:已发货',
+	create_time  timestamp  NOT  NULL  COMMENT  '创建时间',
+	PRIMARY  KEY(seckill_id,user_phone),/*联合主键*/
+	KEY  idx_create_time(create_time)
+	)ENGINE  =  InnoDB    DEFAULT  CHARSET=utf8  COMMENT='秒杀成功明细表';	
+	
+	
+	http://dev.mysql.com/get/Downloads/MySQL-5.7/mysql-5.7.13-linux-glibc2.5-i686.tar
+	
+	
+	set character_set_results=utf8;

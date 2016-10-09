@@ -1,0 +1,21 @@
+1.停止mysql服务:
+	services.msc 进入到服务界面
+	
+2.在cmd>输入一个命令:
+	mysqld --skip-grant-tables	(开启一个mysql服务,不需要进行认证.)
+	
+3.新打开一个cmd窗口
+	mysql -u root -p  不需要输入密码.就可以进入.
+	
+4.输入命令 show databases;查看数据库，输入命令 use mysql;使用mysql数据库。
+
+5.修改密码的语句:
+	update user set password=password('root') WHERE user='root';
+	
+6.将两个窗口都关闭.
+
+7.任务管理器中结束（mysqld）进程.
+
+8.重启mysql服务
+
+

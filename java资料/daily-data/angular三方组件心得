@@ -1,0 +1,11 @@
+angular三方组件:
+1)ui-router:$router太弱了
+2）bindonce:ng-repeat带来的双向绑定性能问题（>2000 性能问题就出现了） ＊＊＊＊＊
+3）angular-sanitize:service支持，过滤html
+4）angular－animate：动画支持
+5）angular－growl：简单的消息提醒
+6）angular－base64：angular的base64实现
+7）angular－translate：angular的多语言支持
+8）angular－cookies：操作cookies
+9）html2js：将html打包成js文件
+10）ui－bootstrap  ＊＊＊＊＊

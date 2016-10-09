@@ -1,0 +1,27 @@
+jvm调优
+1）jvm内存调优
+	年轻代－>年老代->持久代
+2）垃圾回收策略调优
+	串行收集器
+	并行收集器，只对年轻代有效
+
+	内存越大，处理效率也就越高，但同时在垃圾回收的时候所需要等待的时间也就越长
+3）server.xml  Connector节点优化
+	1.指定使用NIO模型来接受HTTP请求 
+	protocol="org.apache.coyote.http11.Http11NioProtocol" 指定使用NIO模型来接受HTTP请求。默认是BlockingIO，配置为protocol="HTTP/1.1" 
+	acceptorThreadCount="2"	使用NIO模型时接收线程的数目 	
+	2.指定使用线程池来处理HTTP请求 
+	首先要配置一个线程池来处理请求（与Connector是平级的，多个Connector可以使用同一个线程池来处理请求） 
+	<Executor name="tomcatThreadPool" namePrefix="catalina-exec-" 
+	maxThreads="1000" minSpareThreads="50" maxIdleTime="600000"/> 
+	<Connector port="8080"	
+	executor="tomcatThreadPool"	指定使用的线程池 	
+	3.其它常用设置 
+	maxHttpHeaderSize="8192"	http请求头信息的最大程度，超过此长度的部分不予处理。一般8K。 
+	URIEncoding="UTF-8"	指定Tomcat容器的URL编码格式。 
+	disableUploadTimeout="true"	上传时是否使用超时机制 
+	enableLookups="false"--是否反查域名，默认值为true。为了提高处理能力，应设置为false 
+	compression="on"   打开压缩功能 
+	compressionMinSize="10240"	启用压缩的输出内容大小，默认为2KB 
+	noCompressionUserAgents="gozilla, traviata"   对于以下的浏览器，不启用压缩 
+	compressableMimeType="text/html,text/xml,text/javascript,text/css,text/plain" 哪些资源类型需要压缩 

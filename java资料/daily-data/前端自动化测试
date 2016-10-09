@@ -1,0 +1,6 @@
+前端自动化测试：
+1）安装node.js
+2)npm安装其他组件
+3)karma（容器 karma start） + jasmine(类后台的junit，编写测试用例)
+4）protractor：专门为angularjs定制的测试工具
+5）grunt：grunt－uglify grunt－watch grunt－concat js压缩，混淆工具

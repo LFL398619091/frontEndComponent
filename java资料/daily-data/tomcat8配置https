@@ -1,0 +1,11 @@
+tomcat8配置https
+1）keytool -genkey -alias sslKeyStore -keyalg RSA -keystore /usr/java/https/keystore/sslKeyStore
+名字与姓氏：sso.tks2u.com(域名)
+2)导出证书
+keytool -export -file /usr/java/https/keystore/sso.crt -alias sslKeyStore -keystore /usr/java/https/keystore/sslKeyStore
+3)为客户端的jvm导入证书
+keytool -import -keystore /usr/java/jdk/jdk1.8.0_91/jre/lib/security/cacerts -file /usr/java/https/keystore/sso.crt -alias sslKeyStore
+密码如果错误，请输入：changeit
+4）配置tomcat8的connector（https默认端口是443）
+<connector port="443" protocol="HTTP/1.1" sslenabled="true" maxthreads="150" scheme="https" secure="true" clientauth="false" sslprotocol="TLS" keystorefile="bin/.keystore" keystorepass="!@#QWE123qwe">
+</connector>
