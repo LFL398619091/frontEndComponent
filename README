@@ -1,0 +1,14 @@
+基于日常工作中经常d用d到饿一些前端组件，作了一些封装，以方便日后所用，同时也希望分享给有需要的前端同学
+1.dialog弹窗
+  简单易用，轻量，只需要依赖zepto
+  dialog.html就是一个demo
+  var dialog = $.dialog({type:"warning",message:"确定清空购物车吗？",buttons:[{skin:"green",text:"确定",callback:function(){}},{skin:"red",text:"取消",callback:function(){}}]})
+  dialog.openDialog();这样便简单的创建了一个dialog
+  关于自定义配置，只需要搞清楚构造函数所需要的config对象的参数含义即可（详见源码注释）
+  
+  
+  
+  ＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+  
+
+2.
