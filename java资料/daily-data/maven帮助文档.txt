@@ -1,5 +1,0 @@
-maven使用技巧：
-1.获取maven安装信息：mvn －v
-1.创建maven项目：mvn archetype:generate -DgroupId=com.fang.seckill -DartifactId=seckill -DarchetypeArtifactId=maven-archetype-webapp
-	(ps:m2使用的是create，m3已经改成generate，切记！！！)		    
-			

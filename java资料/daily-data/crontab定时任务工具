@@ -1,9 +1,0 @@
-1.开源免费的ssh连接工具：putty
-2。CronTab：类unix系统下设置周期性任务的工具
-3.两个概念：cron job－任务  cron table－任务列表
-4.两个命令：crontab －l－检查是否安装crontab服务
-		   service crond status －检查crontab服务运行状态
-5.安装crontab
-	1）yum install vixie－cron
-	2）yum install crontabs
-默认的centos都已经安装了这个服务

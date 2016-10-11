@@ -1,5 +1,0 @@
-zookeeper教程
-1）下载地址：http://apache.fayea.com/zookeeper/zookeeper-3.4.8/zookeeper-3.4.8.tar.gz
-2)配置环境变量 ZOOKEEPER_HOME＝/usr/local/ZooKeeper  PATH=$ZOOKEEPER_HOME/bin:$PATH =>source /root/.bash_profile(刷新环境变量)
-3)修改ZooKeeper配置 cp zoo_sample.cfg zoo.cfg   vim zoo.cfg  端口号：2181
-4)启动ZooKeeper /usr/local/zookeeper/ZooKeeper/bin/zkServer.sh start

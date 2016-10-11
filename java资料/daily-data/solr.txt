@@ -1,2 +1,0 @@
-solr资料
-1）下载地址：wget http://apache.fayea.com/lucene/solr/5.5.1/solr-5.5.1.tgz
