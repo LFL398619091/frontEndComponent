@@ -1,0 +1,42 @@
+$tab-content:100;
+body{
+	padding-top: 70px;
+}
+.pic-container{
+	width: 1000px;
+	height: 310px;
+	overflow: hidden;
+}
+.row{
+	font-family: "Microsoft Yahei";
+	text-align:center;
+	& h2{
+		color:#2B1715;
+	}
+	& p{
+		letter-spacing: 1px;
+	}
+	& button{
+		width: 120px;
+	}
+}
+.tab-header{
+	margin-top: 20px;
+}
+.tab-content{
+	margin-top: 20px;
+	& p{
+		font-size: 20px;
+		line-height: 2;
+	}
+}
+.footer{
+	padding-bottom: 50px;
+	& p{
+		text-align: center;
+	}
+}
+.hr{
+	margin: 30px 0;
+	border: 1px solid rgba(238,238,238,.8);
+}

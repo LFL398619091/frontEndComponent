@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<title>h5dev</title>
+<meta name="description" content="">
+<meta name="keywords" content="">
+<link href="" rel="stylesheet">
+<style type="text/css">
+	body{
+		margin: 0;
+		padding: 0;
+	}
+	.component{
+		/* width: 50%; */
+		height: 50px;
+		margin-bottom: 20px;
+		background-color: #eee;
+		/* display: none; */
+	}
+</style>
+</head>
+<body>
+    <div class="h5" id="h5">
+    	<div class="section page" id="page-1">
+    		<div class="slide component logo">logo</div>
+    		<div class="slide component slogon">slogon</div>
+    	</div>
+    	<div class="section page" id="page-2">
+    		<div class="component desc">描述信息</div>
+    	</div>
+    	<div class="section page" id="page-3">
+    		<div class="component bar">柱状图</div>
+    	</div>
+    </div>
+</body>
+<script type="text/javascript" src="../js/lib/jquery.js"></script>
+<script type="text/javascript" src="../js/lib/jquery-ui.min.js"></script>
+<script type="text/javascript" src="../js/lib/jquery.fullPage.js"></script>
+<script type="text/javascript">
+	$(function(){
+    $('#h5').fullpage({
+        'sectionsColor': ['red', 'green', 'blue'],
+        anchors: ['page1', 'page2', 'page3'],
+        onLeave:function(index,nextIndex,direction){
+        	$('#h5').find('.page').eq(index-1).trigger('onLeave');
+        },
+        afterLoad:function(currentPage,currentIndex){
+        	$('#h5').find('.page').eq(currentIndex-1).trigger('onArrive');
+        }
+    })
+    /*给page注册载入和载出事件*/
+    $('.page').on('onLeave',function(){
+    	/*trigger会由于事件冒泡，导致堆栈溢出*/
+    	// $(this).find('.component').trigger('onLeave');
+    	// $(this).find('.component').triggerHandler('onLeave');
+    	$(this).find('.component').trigger('onLeave');
+    });
+    $('.page').on('onArrive',function(){
+    	$(this).find('.component').trigger('onArrive');
+    });
+    /*给component注册淡入淡出时间*/
+    $('.component').on('onLeave',function(){
+    	$(this).fadeOut();
+    	return false;
+    });
+    $('.component').on('onArrive',function(){
+    	$(this).fadeIn();
+    	return false;
+    });
+})
+</script>
+</html>

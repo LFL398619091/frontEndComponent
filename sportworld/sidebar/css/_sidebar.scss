@@ -1,0 +1,104 @@
+@charset "UTF-8";
+/*sass变量 begin*/
+$sidebar-width:52px;
+$sidebar-height:52px;
+$sidebar-zIndex:10000;
+/*sass变量 end*/
+
+/*sass函数 begin*/
+/*sass函数 begin*/
+@import "mixin";
+/*sass函数 end*/
+
+/*sidebar container begin*/
+.sidebar-container{
+	position: fixed;
+	top: 50%;
+	right: 0%;
+	margin-top: -((4*$sidebar-height)+3)/2;
+	z-index: $sidebar-zIndex;
+	width: $sidebar-width;
+}/*sidebar container end*/
+.sidebar-item,.sidebar-btn,.sidebar-icon{
+	width: $sidebar-width;
+	height: $sidebar-height;
+}
+.sidebar-item{
+	position: relative;
+	display: block;
+	margin-top: 1px;
+	&:hover{
+		.sidebar-qrcode{
+			@include opacity(1);
+			@include scale(1);
+		}
+	};
+}
+.sidebar-btn{
+	position: absolute;
+	left: 0;
+	top: 0;
+	overflow: hidden;
+	&:hover{
+		.sidebar-icon{
+			top: -$sidebar-height;
+		}
+		.sidebar-text{
+			top: 0;
+		}
+		.sidebar-qrcode{
+			@include opacity(1);
+			@include scale(1);
+		}
+	};
+}
+.sidebar-icon{
+	position: absolute;
+	left: 0;
+	top: 0;
+	background-color: #d0d6d9;
+	font-size: 30px;
+	color: #fff;
+	text-align: center;
+	line-height: $sidebar-height;
+	@include transition(top 1s);
+}
+.sidebar-text{
+	position: absolute;
+	left: 0;
+	top: -$sidebar-height;
+	width: $sidebar-width;
+	height: ($sidebar-height)-12;
+	padding-top: 12px;
+	background-color: #98a1a6;
+	font-size: 12px;
+	color: #fff;
+	text-align: center;
+	line-height: 1.2;
+	@include transition(top 1s);
+}
+.sidebar-qrcode{
+	position: absolute;
+	right: $sidebar-width + 2;
+	bottom: -10px;
+	width: 136px;
+	background: url('../images/jameslin.jpeg') no-repeat;
+	@include opacity(0);
+	@include scale(0.01);
+	@include transform-origin(95% 95%);
+	@include transition(all 1s);
+}
+.sidebar-qrcode-weixin{
+	height: 214px;
+	/* background-position-y: 0,200px; */
+}
+.sidebar-qrcode-app{
+	height: 214px;
+	/* background-position-y:-222px; */
+}
+
+
+
+
+
+
