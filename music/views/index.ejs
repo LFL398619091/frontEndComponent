@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/index.css' />
+  </head>
+  <body>
+    <div class="top">
+    	<h2 class="title"><%=title%></h2>
+    	<ul id="type">
+    		<li data-type="dot" id="dot">点状图</li>
+    		<li data-type="column" id="column" class="selected">柱状图</li>
+    	</ul>
+    	<p>
+    		Volume<input type="range" id="volume" min="0" max="100" value="60">
+    	</p>
+    </div>
+    <div class="left">
+    	<ul id="musicList">
+    		<% musicList.forEach(function(music){%>
+				<li title="<%=music%>"><%=music%></li>
+    		<%})%>
+    	</ul>
+    </div>
+    <div class="right" id="box"></div>
+    <script src="/javascripts/musicVisualizer.js" type="text/javascript"></script>
+    <script src="/javascripts/music.js" type="text/javascript"></script>
+  </body>
+</html>
