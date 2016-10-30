@@ -1,0 +1,68 @@
+body{
+	margin:0;
+	padding:0;
+	font-size:14px;
+	background-color:#ddd;
+	color:#fff;
+}
+.h5_page{
+	background: url('../images/page_bg.png');
+}
+
+.h5_component_slogon{
+	-webkit-animation: move 2s infinite 2s;
+	@-webkit-keyframes move{
+		0%{
+			transform: rotate(0deg);
+		}
+		5%{
+			transform: rotate(3deg);
+		}
+		10%{
+			transform: rotate(-4deg);
+		}
+		15%{
+			transform: rotate(3deg);
+		}
+		20%{
+			transform: rotate(-2deg);
+		}
+		25%{
+			transform: rotate(1deg);
+		}
+		30%{
+			transform: rotate(-1deg);
+		}
+		70%{
+			transform: rotate(0deg);
+		}
+		100%{
+			transform: rotate(0deg);
+		}
+
+	}
+}
+
+.h5_component_caption{
+	background: url('../images/page_caption_bg.png') no-repeat;
+	background-size: 100%;
+	text-align: center;
+	line-height: 140px;
+	font-size: 20px;
+}
+
+.h5_page_home{
+	background-image: url('../images/face_bg.png');
+}
+.h5_page_desc{
+	
+}
+.h5_page_tail{
+	& .h5_component_back{
+		top: 15px;
+		-webkit-animation: changeTop 2s infinite 2s;
+		@-webkit-keyframes changeTop{
+			50%{top: 10px};
+		};
+	}
+}

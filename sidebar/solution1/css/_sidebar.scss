@@ -1,0 +1,90 @@
+@charset "UTF-8";
+/*sass变量 begin*/
+$sidebar-width:52px;
+$sidebar-height:52px;
+$sidebar-zIndex:10000;
+/*sass变量 end*/
+
+/*sass函数 begin*/
+@mixin sidebarPos($pos,$hoverPos){
+	background-position: 0 $pos;
+	&:hover{
+		background-position: 0 $hoverPos;
+	};
+};
+@import "mixin";
+/*sass函数 end*/
+
+/*sidebar container begin*/
+.sidebar-container{
+	position: fixed;
+	top: 50%;
+	right: 0%;
+	margin-top: -((4*$sidebar-height)+3)/2;
+	z-index: $sidebar-zIndex;
+	width: $sidebar-width;
+}/*sidebar container end*/
+
+/*icon common css begin*/
+.sidebar-item{
+	position: relative;
+	display: block;
+	width: $sidebar-width;
+	height: $sidebar-height;
+	background: url('../images/toolbar.png') no-repeat ;
+	margin-top: 1px;
+	@include transition(background-position 1s);
+	&:hover{
+		.sidebar-qrcode{
+			@include opacity(1);
+			@include scale(1);
+		}
+	};
+}/*common css end*/
+
+/*微信icon begin*/
+.sidebar-item-weixin{
+	// background-position: 0 -798px;
+	// &:hover{
+	// 	background-position: 0 -860px;
+	// };
+	@include sidebarPos(-798px,-860px);
+	.sidebar-qrcode{
+		height: 212px;
+		background-position-y: 0,200px;
+	}
+}/*微信icon begin*/
+
+/*feedback icon begin*/
+.sidebar-item-feedback{
+	@include sidebarPos(-426px,-488px);
+}/*feedback icon begin*/
+
+/*app icon begin*/
+.sidebar-item-app{
+	@include sidebarPos(-550px,-612px);
+	.sidebar-qrcode{
+		height: 194px;
+		background-position-y:-222px;
+	}
+}/*app icon begin*/
+
+/*top icon begin*/
+.sidebar-item-top{
+	@include sidebarPos(-674px,-736px);
+}/*top icon begin*/
+
+/*二维码common begin*/
+.sidebar-qrcode{
+	position: absolute;
+	right: $sidebar-width - 6;
+	bottom: -10px;
+	width: 172px;
+	background: url('../images/toolbar_img.png') no-repeat;
+	@include opacity(0);
+	@include scale(0.01);
+	@include transform-origin(95% 95%);
+	@include transition(all 1s);
+}/*二维码common begin*/
+
+

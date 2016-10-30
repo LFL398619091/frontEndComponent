@@ -1,0 +1,152 @@
+@charset "UTF-8";
+/**
+ * 
+ * @authors jameslin
+ * @date    2016-10-07 23:06:36
+ * @description 遮罩层css
+ */
+ .g-dialog-container{
+ 	position: fixed;
+ 	left: 0px;
+ 	top: 0px;
+ 	width: 100%;
+ 	height: 100%;
+ 	background-color: rgba(0,0,0,0.6);
+
+ 	/* 移动端的盒子模型 */
+ 	/* display: -webkit-box;
+ 	-webkit-box-pack: center;
+ 	-webkit-box-align: center; */
+ 	display: -webkit-flex;
+ 	-webkit-justify-content: center;
+ 	-webkit-align-items: center;
+ }
+ .g-dialog-container .dialog-window{
+ 	padding: 1rem;
+ 	border-radius: 10px;
+ 	background-color: rgba(0, 0, 0, 0.8);
+ 	-webkit-transition: all .3s cubic-bezier(0.43, 0.14, 0.34,1.6);
+ }
+ /* icon begin */
+ .g-dialog-container .dialog-window .dialog-header{
+ 	width: 50px;
+ 	height: 50px;
+ 	margin: 0 auto;
+ 	background-size: 50px;
+ 	border: 2px solid #fff;
+ 	border-radius: 50%;
+ 	display: -webkit-flex;
+ 	-webkit-justify-content: center;
+ 	-webkit-align-items: center;
+ }
+  /* css提示框 begin */
+ .ok:after{
+	content: "";
+	display: block;
+	width: 30px;
+	height: 10px;
+	border: 2px solid #fff;
+	border-width: 0px 0px 2px 2px;
+	-webkit-transform: rotate(-50deg);
+ } /* css提示框 end */
+
+  /* css警告框 begin */
+ .warning{
+ 	-webkit-transform: rotate(90deg);
+ }
+ .warning:before{
+	content: "";
+	display: block;
+	width: 20px;
+	height: 5px;
+	border: 2px;
+	background-color: #fff;
+ }
+ .warning:after{
+	content: "";
+	display: block;
+	width: 7px;
+	height: 7px;
+	border-radius: 50%;
+	background-color: #fff;
+	margin-left: 5px;
+ }/* css警告框 end */
+
+ /* css加载icon begin */
+ @-webkit-keyframes dialog-loading-1{
+ 	0%{
+		-webkit-transform: translate(-5px, 0px);
+ 	}
+ 	50%{
+		-webkit-transform: translate(10px, 0px);
+ 	}
+ 	100%{
+		-webkit-transform: translate(-5px, 0px);
+ 	}
+ }
+  @-webkit-keyframes dialog-loading-2{
+ 	0%{
+		-webkit-transform: translate(5px, 0px);
+ 	}
+ 	50%{
+		-webkit-transform: translate(-10px, 0px);
+ 	}
+ 	100%{
+		-webkit-transform: translate(5px, 0px);
+ 	}
+ }
+ .dialog-loading:before{
+	content: "";
+	display: block;
+	width: 10px;
+	height: 10px;
+	border-radius: 50%;
+	background-color: yellow;
+	-webkit-animation: dialog-loading-1 0.8s infinite;
+ }
+ .dialog-loading:after{
+	content: "";
+	display: block;
+	width: 10px;
+	height: 10px;
+	border-radius: 50%;
+	background-color: red;
+	-webkit-animation: dialog-loading-2 0.8s infinite;
+ }/* css加载icon end */
+
+ /* icon end */
+
+ /* content begin */
+ .g-dialog-container .dialog-window .dialog-content{
+ 	padding: 1rem 1rem 0;
+ 	color: #fff;
+ 	line-height: 180%;
+ 	text-align: center;
+ }
+ /* content end */
+
+ /* footer begin */
+ .g-dialog-container .dialog-window .dialog-footer{
+ 	padding: 1rem 1rem 0;
+ 	display: -webkit-flex;
+ 	-webkit-justify-content: center;
+ 	-webkit-align-items: center;
+ }
+ .g-dialog-container .dialog-window .dialog-footer button{
+ 	-webkit-appearance: normal;
+ 	background-color: rgba(255, 255, 255, 0.8);
+ 	padding: 0.8rem 1.8rem;
+ 	border: none;
+ 	color: #eee;
+ 	border-radius: 5px;
+ 	margin: 0 1.3rem;
+ 	text-shadow: #666 1px 1px 0;
+ }
+ .g-dialog-container .dialog-window .dialog-footer .green{
+ 	background-color: rgba(2, 202, 200, 0.8);
+ }
+
+ .g-dialog-container .dialog-window .dialog-footer .red{
+ 	background-color: rgba(251, 23, 50, 0.8);
+ }
+ /* footer end */

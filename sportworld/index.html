@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="apple-mobile-web-app-capable" content="yes"  /><!-- 删除苹果默认的工具栏和菜单栏 -->
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" /><!-- 设置苹果工具栏颜色 -->
+    <meta name="format-detection" content="telephone=no,email=no" /><!-- 忽略页面中的数字识别为电话或邮箱 -->
+    <title>体育视界</title>
+    <!-- 字体样式文件 -->
+    <link rel="stylesheet" href="./sidebar/css/font/iconfont.css">
+    <!-- 右侧工具条样式文件 -->
+  <link rel="stylesheet" href="./sidebar/css/index.css">
+    <!-- Bootstrap -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <!-- mF_fancy -->
+    <link rel="stylesheet" href="css/mF_fancy.css">
+    <!-- 主要样式文件 -->
+    <link rel="stylesheet" href="./css/index.css">
+    <link rel="stylesheet" href="./dialog/css/dialog.css">
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="http://cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="http://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <!-- 页面容器begin -->
+    <div class="container-fluid">
+      <!--右侧工具条begin  -->
+      <div class="sidebar-container">
+        <a href="javascript:void(0)" class="sidebar-item">
+          <span class="sidebar-btn">
+            <i class="sidebar-icon icon-gongzhonghao"></i>
+            <span class="sidebar-text">公众<br/>账号</span>
+          </span>
+          <span class="sidebar-qrcode sidebar-qrcode-weixin"></span>
+        </a>
+        <a href="javascript:void(0)" class="sidebar-item">
+          <span class="sidebar-btn">
+            <i class="sidebar-icon icon-yijianfankui"></i>
+            <span class="sidebar-text">意见<br/>反馈</span>
+          </span>
+        </a>
+        <a href="javascript:void(0)" class="sidebar-item">
+          <span class="sidebar-btn">
+            <i class="sidebar-icon icon-appxiazai"></i>
+            <span class="sidebar-text">APP<br/>下载</span>
+          </span>
+          <span class="sidebar-qrcode sidebar-qrcode-app"></span>
+        </a>
+        <a id="back2Top" href="javascript:void(0)" class="sidebar-item">
+          <span class="sidebar-btn">
+            <i class="sidebar-icon icon-fanhuidingbu"></i>
+            <span class="sidebar-text">返回<br/>顶部</span>
+          </span>
+        </a>
+      </div>
+      <!-- 右侧工具条end -->
+      <!-- 导航条begin -->
+      <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="container-fluid">
+          <!-- Brand and toggle get grouped for better mobile display -->
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">体育世界</a>
+          </div>
+
+          <!-- Collect the nav links, forms, and other content for toggling -->
+          <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+              <li class="active"><a href="#">About Me</a></li>
+              <li><a href="#">Contact Us</a></li>
+              <li class="dropdown" >
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">球队 <span class="caret"></span></a>
+                <ul class="dropdown-menu" role="menu" id="nav-dropdown-list">
+                  <li><a href="#lakers_div" role="tab" data-toggle="tab">湖人</a></li>
+                  <li><a href="#warriors_div" role="tab" data-toggle="tab">勇士</a></li>
+                  <li><a href="#spurs_div" role="tab" data-toggle="tab">马刺</a></li>
+                  <li class="divider"></li>
+                  <li><a href="javascript:void(0)">更多。。。</a></li>
+                </ul>
+              </li>
+            </ul>
+          </div><!-- /.navbar-collapse -->
+        </div><!-- /.container-fluid -->
+      </nav><!-- 导航条end -->
+      <!-- 图片轮播begin -->
+      <div id="boxID" class="center-block pic-container">
+        <div class="loading"><img src="./images/loading.gif" alt="请稍候..." /></div><!--载入画面(可删除)-->
+        <div class="pic"><!--内容列表(li数目可随意增减)-->
+          <ul>
+          <li><a href="#"><img src="./images/ad2.jpg" thumb="" alt="美女编程" text="详细描述1" /></a></li>
+            <li><a href="#"><img src="./images/ad3.jpg" thumb="" alt="男神coding" text="详细描述2" /></a></li>
+            <li><a href="#"><img src="./images/ad4.jpg" thumb="" alt="妹纸设计" text="详细描述3" /></a></li>
+          </ul>
+        </div>
+      </div>
+      <!-- 图片轮播end -->
+      <!-- 简介部分begin -->
+      <div class="row">
+        <h2>球队简介</h2>
+        <div class="col-md-4">  <h3>湖人</h3>
+          <p>湖人队于1948年加入美国职业篮球联赛（NBA）。球队的最大特点是总有球星跟他们联系在一起。乔治·迈肯是球队早期主力中锋，在他的带领下，湖人很快成为了NBA的豪门球队。1960年代，埃尔金·贝勒与杰里·韦斯特的到来，使湖人队在整个60年代从未缺席过季后赛。1976年，湖人队得到了绰号“天勾”的卡里姆·阿布杜尔-贾巴尔。1979-80赛季，湖人选中新秀埃尔文·约翰逊，他在该赛季总决赛中顶替受伤的贾巴尔并带领球队夺冠。</p>
+          <button type="button" class="btn btn-primary" id="btn1">赛程</button>
+        </div>
+        <div class="col-md-4">
+          <h3>勇士</h3>
+          <p>勇士队主场原来在费城，1962年才搬到加州；由于加州的昵称是“金州”[1]  ，故取名“金州勇士”[2]  。它是最早加盟NBA的11支球队之一；在NBA历史上，曾四次夺过总冠军，NBA的第一次总冠军得主就是勇士队；NBA单场最高分纪录保持者威尔特·张伯伦就是在勇士队拿下100分的。</p>
+          <button type="button" class="btn btn-primary">赛程</button>
+        </div>
+        <div class="col-md-4"><h3>马刺</h3>
+          <p>马刺队是在1976年ABA与NBA合并后保持完整的原ABA联赛的四支球队之一，也是原ABA联赛中唯一一支夺得NBA总冠军的球队。1976年以来，马刺队共计获得5次NBA总冠军，6次西部冠军，以及21次赛区冠军。只有四次未能进入季后赛，马刺队利用四支乐透签相继选中了埃尔文·罗伯特森（1984年第7顺位）、大卫·罗宾逊（1987年状元）、肖恩·埃利奥特（1989年第3顺位）和蒂姆·邓肯（1997年状元）。</p>
+          <button type="button" class="btn btn-primary">赛程</button>
+        </div>
+        <!-- Optional: clear the XS cols if their content doesn't match in height -->
+        <div class="clearfix visible-xs-block"></div>
+      </div>
+      <!-- 简介部分end -->
+
+      <!-- 页签begin -->
+      <div class="container-fluid tab-header" >
+        <!-- 页签头部begin -->
+        <ul class="nav nav-tabs" role="tablist" id="tab-list">
+          <li class="active"><a href="#lakers_div" role="tab" data-toggle="tab">湖人</a></li>
+          <li ><a href="#warriors_div" role="tab" data-toggle="tab">勇士</a></li>
+          <li ><a href="#spurs_div" role="tab" data-toggle="tab">马刺</a></li>
+        </ul><!-- 页签头部end -->
+        <!-- 页签内容begin -->
+      <div class="tab-content">
+        <!-- lakers begin -->
+        <div class="tab-pane active" id="lakers_div">
+          <div class="row">
+            <div class="
+            col-md-5">
+            <img src="http://f.hiphotos.baidu.com/baike/w%3D268%3Bg%3D0/sign=2b5196b6d5160924dc25a51dec3c52c7/faf2b2119313b07e572ca1e809d7912396dd8cb9.jpg" alt="">
+          </div>
+          <div class="
+          col-md-7">
+          <p>洛杉矶湖人队（Los Angeles Lakers），是一个位于美国加利福尼亚州洛杉矶的篮球俱乐部，1947年成立于明尼阿波利斯，1960年搬迁到了洛杉矶。湖人这个名字来源于明尼阿波利斯的别称——千湖之地，指在美国东北五大湖工作或者居住的人。</p>
+        </div>
+      </div>
+    </div><!-- lakers end -->
+        <!-- warriors begin -->
+        <div class="tab-pane" id="warriors_div">
+          <div class="row">
+            <div class="
+            col-md-7">
+            <p>金州勇士队，于1946年成立并加盟NBA，是一支属于美国的加利福尼亚州奥克兰市（Oakland, California）的职业篮球队，是美国男篮职业联赛（NBA）西部联盟太平洋赛区的一部分。</p>
+          </div>
+            <div class="
+            col-md-5">
+            <img src="http://d.hiphotos.baidu.com/baike/w%3D268%3Bg%3D0/sign=762c38d4b5fb43161a1f7d7c189f211e/7e3e6709c93d70cf7086f212ffdcd100baa12bb4.jpg" alt="">
+          </div>
+      </div>
+    </div><!-- warriors end -->
+          <!-- spurs begin -->
+          <div class="tab-pane" id="spurs_div">
+            <div class="row">
+              <div class="
+              col-md-5">
+              <img src="http://g.hiphotos.baidu.com/baike/w%3D268%3Bg%3D0/sign=9ddb51f0cb8065387beaa315afe6c679/d01373f082025aafaac7aa75faedab64024f1a92.jpg" alt="">
+            </div>
+            <div class="
+            col-md-7">
+            <p>圣安东尼奥马刺队是一支位于美国德克萨斯州圣安东尼奥的职业篮球队。其前身达拉斯灌木丛队于1967年成立并加入美国篮球协会（ABA），1973年搬至圣安东尼奥并改名马刺队，1976年加入美国男篮职业联赛（NBA）。现从属于NBA西部联盟的西南赛区。</p>
+          </div>
+        </div>
+        </div><!-- spurs end -->
+
+      </div><!-- 页签内容end -->
+      </div> <!-- 页签end -->
+      <div class="hr"></div>
+      <footer class="footer">
+        <p>@ jameslin版权所有</p>
+      </footer>
+    </div><!-- 页面容器end -->
+    <!-- 脚本库begin -->
+    <!-- requirejs -->
+    <script src="./js/require2.1.11.js" data-main="./js/main"></script>
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="./js/jquery3.1.1.min.js"></script>
+    <!-- dialog.js -->
+    <script src="./dialog/js/dialog.js"></script>
+    <!-- myfocusjs -->
+    <script src="./js/myfocus-2.0.1.min.js"></script>
+    <!-- mF_fancy.js -->
+    <script src="./js/mF_fancy.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="js/bootstrap.min.js"></script>
+    <!-- 脚本库end -->
+  </body>
+</html>
